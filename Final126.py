@@ -23,4 +23,71 @@ To Do in This Project:
 NumPy and Pandas 8.1-4
 Webscraping and JSON - 10.4 and 10.5
 3.19, 5.9, 5.11, 5.12, 5.13, 5.14
+
 '''
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import requests as req
+from bs4 import BeautifulSoup #I want to scrape populations of cities in India with over 1mil as it the most populated country
+import os
+
+url="https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population"
+
+response=req.get(url)
+
+print(response.text)
+
+soup = BeautifulSoup(response.text, 'html.parser')
+
+table = soup.find('table', attrs={'class':'wikitable'})
+
+df1=pd.read_html(str(table)) #reading in html data into list
+type(df1)
+
+df1=pd.DataFrame(df1[0]) #making into dataframe object
+type(df1)
+
+print(df1.head())
+
+#drop unwanted columns
+data = df1.drop(["Rank", "Ref", "Population (2001)[3][a]"], axis=1)
+#rename cols
+data = data.rename(columns={"State or union territory": "State","Population (2011)[3]": "Population"})
+
+print(data.head())
+print(data.columns)
+
+data['Population'] = pd.to_numeric(data['Population'])
+
+median = int((data['Population'].median()))
+average = int((data['Population'].mean()))
+total = int((data['Population'].sum()))
+median_population = str(median) + " People"
+
+print(median_population)
+
+data_sorted = data.sort_values(by='Population', ascending=False)
+top_5_states = data_sorted.head(5) #store the highest 5 population states and cities
+print(top_5_states)
+
+above_med = data[data['Population'] > median]
+above_avg = data[data['Population'] > average]
+print(above_avg)
+print(above_med)
+
+
+csv_file_path = os.path.join(str(os.getcwd()), 'data_output.csv')
+print(csv_file_path)
+
+data.to_csv(csv_file_path, index=False)
+
+above_med_csv_path = os.path.join(str(os.getcwd()), 'above_med_population.csv')
+
+above_avg_csv_path = os.path.join(str(os.getcwd()), 'above_avg_population.csv')
+
+above_med.to_csv(above_med_csv_path, index=False)
+
+above_avg.to_csv(above_avg_csv_path, index=False)
+
