@@ -30,7 +30,6 @@ In my second final project I will cover:
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import requests as req
 from bs4 import BeautifulSoup #10.2Used bs4 to scrape
 import os
