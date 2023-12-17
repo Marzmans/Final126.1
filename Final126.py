@@ -19,7 +19,7 @@ Checklist items that I completed in consolidation project:
 6.7 - I chose an appropriate license for my last project (MIT)
 Git - I completed all of the Git requirements for the last project
 
-To Do in This Project: 
+What I cover in this project: 
 NumPy and Pandas 8.1-4
 Webscraping and JSON - 10.1-3 
 
