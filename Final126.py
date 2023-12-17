@@ -34,6 +34,8 @@ import requests as req
 from bs4 import BeautifulSoup #10.2Used bs4 to scrape
 import os
 
+#6.8 - I appropriately used open licenses for the libraries above 
+
 #10.1 - I want to scrape populations of cities in India with over 1mil as it the most populated country
 url="https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population"
 
