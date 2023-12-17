@@ -48,7 +48,7 @@ soup = BeautifulSoup(response.text, 'html.parser')
 
 table = soup.find('table', attrs={'class':'wikitable'})
 
-#8.2 - Below I use tables from the webscraped wikipage to read data into data frames instead of csv 
+#8.2 - Below I use tables from the webscraped wikipage to read data into data frames instead of csv, Professor Jackson said this was an acceptable replacement for the requirement 
 df1=pd.read_html(str(table)) #reading in html data into list
 type(df1)
 
